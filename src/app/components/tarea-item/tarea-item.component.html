@@ -1,10 +1,30 @@
-<ion-item lines="inset">
-  <ion-checkbox slot="start" [checked]="tarea.completada"></ion-checkbox>
-  <ion-label>
-    <h2>{{ tarea.titulo }}</h2>
-    <p>{{ tarea.descripcion }}</p>
-  </ion-label>
-  <ion-badge slot="end" [color]="tarea.completada ? 'success' : 'primary'">
-    {{ tarea.completada ? 'OK' : 'Pendiente' }}
-  </ion-badge>
-</ion-item>
+<ion-item-sliding>
+  <ion-item lines="inset">
+    <ion-checkbox
+      slot="start"
+      [checked]="tarea.estado === 'completada'"
+      (ionChange)="checkTarea($event)">
+    </ion-checkbox>
+
+    <ion-label>
+      <h2 [style.text-decoration]="tarea.estado === 'completada' ? 'line-through' : 'none'">
+        {{ tarea.titulo }}
+      </h2>
+      <p>{{ tarea.descripcion }}</p>
+    </ion-label>
+
+    <ion-badge slot="end" color="success" *ngIf="tarea.estado === 'pendiente'">Pendiente</ion-badge>
+    <ion-badge slot="end" color="primary" *ngIf="tarea.estado === 'en progreso'">En Progreso</ion-badge>
+    <ion-badge slot="end" color="secondary" *ngIf="tarea.estado === 'completada'">Completada</ion-badge>
+  </ion-item>
+
+  <ion-item-options side="end">
+    <ion-item-option color="warning" (click)="editarNombre()">
+      <ion-icon slot="icon-only" name="create"></ion-icon>
+    </ion-item-option>
+
+    <ion-item-option color="danger" (click)="eliminar()" *ngIf="userRole === 'admin'">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

@@ -1,10 +1,43 @@
-<app-header titulo="Mi Gestor de Tareas"></app-header>
+<app-header titulo="Gestor de tareas"></app-header>
 
 <ion-content>
-  <ion-list>
+  <ion-item lines="inset" class="ion-margin-bottom">
+    <ion-input
+      [(ngModel)]="nuevaTareaTitulo"
+      placeholder="¿Qué hay que hacer?"
+      (keyup.enter)="agregarTarea()">
+    </ion-input>
+    <ion-button slot="end" fill="clear" (click)="agregarTarea()">
+      <ion-icon name="add-circle" size="large"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <ion-list *ngIf="esAdmin">
+    <ion-item-group *ngFor="let grupo of tareasAgrupadas | keyvalue">
+      <ion-item-divider sticky="true">
+        <ion-icon name="person-circle" slot="start" color="primary"></ion-icon>
+        <ion-label>{{ grupo.key | uppercase }}</ion-label>
+      </ion-item-divider>
+
+      <app-tarea-item
+        *ngFor="let item of $any(grupo.value)"
+        [tarea]="item"
+        (tareaBorrada)="onTareaBorrada($event)"
+        (tareaEditada)="onTareaEditada($event)">
+      </app-tarea-item>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list *ngIf="!esAdmin">
     <app-tarea-item
       *ngFor="let item of tareas"
-      [tarea]="item">
+      [tarea]="item"
+      (tareaBorrada)="onTareaBorrada($event)"
+      (tareaEditada)="onTareaEditada($event)">
     </app-tarea-item>
   </ion-list>
+
+  <div *ngIf="tareas.length === 0" class="ion-text-center ion-padding">
+    <ion-note>No hay tareas registradas.</ion-note>
+  </div>
 </ion-content>

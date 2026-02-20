@@ -25,3 +25,54 @@
 #container a {
   text-decoration: none;
 }
+
+
+ion-item[lines="inset"] {
+  margin-left: 16px;
+  margin-right: 16px;
+  --inner-padding-end: 0;
+}
+
+
+ion-list {
+  margin-left: 16px;
+  margin-right: 16px;
+  background: transparent;
+}
+
+
+ion-list {
+  margin-top: 10px;
+}
+
+app-tarea-item {
+  margin-bottom: 8px;
+  display: block;
+}
+
+ion-item-divider {
+  --background: #1e1e1e;
+  --color: #4e8ef7;
+  --padding-top: 15px;
+  --padding-bottom: 15px;
+  margin-top: 20px;
+  border-bottom: 2px solid #4e8ef7;
+
+  ion-label {
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  ion-icon {
+    font-size: 1.4rem;
+    margin-right: 10px;
+  }
+}
+
+
+ion-list {
+  background: transparent;
+  padding: 0 16px;
+}
