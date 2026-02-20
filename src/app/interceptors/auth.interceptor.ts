@@ -4,13 +4,19 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-const authReq = request.clone({
-setHeaders: {
-'x-user-id': '1',
-'x-user-role': 'admin'
-}
-});
-return next.handle(authReq);
-}
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+
+    const userId = localStorage.getItem('userId') || '';
+    const userRole = localStorage.getItem('role') || '';
+
+    const authReq = request.clone({
+      setHeaders: {
+        'x-user-id': userId,
+        'x-user-role': userRole
+      }
+    });
+
+    return next.handle(authReq);
+  }
 }

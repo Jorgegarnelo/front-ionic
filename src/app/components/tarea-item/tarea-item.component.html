@@ -1,3 +1,10 @@
-<p>
-  tarea-item works!
-</p>
+<ion-item lines="inset">
+  <ion-checkbox slot="start" [checked]="tarea.completada"></ion-checkbox>
+  <ion-label>
+    <h2>{{ tarea.titulo }}</h2>
+    <p>{{ tarea.descripcion }}</p>
+  </ion-label>
+  <ion-badge slot="end" [color]="tarea.completada ? 'success' : 'primary'">
+    {{ tarea.completada ? 'OK' : 'Pendiente' }}
+  </ion-badge>
+</ion-item>
