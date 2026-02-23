@@ -32,11 +32,12 @@
 
   .custom-input {
     --background: transparent;
-    border: 1px solid #ccc;
+    border: 1px solid var(--ion-color-primary);
     border-radius: 12px;
     margin-bottom: 15px;
     --padding-start: 10px;
-
+    --inner-border-width: 0;
+    --border-width: 0;
     ion-icon {
       margin-top: 10px;
     }
@@ -56,4 +57,9 @@
       margin-left: 5px;
     }
   }
+}
+
+.custom-input.item-has-focus {
+  border-color: var(--ion-color-primary);
+  box-shadow: 0 0 8px rgba(var(--ion-color-primary-rgb), 0.2);
 }
